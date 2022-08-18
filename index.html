@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="style.css" />
+  <title>Weekly TODO Planning</title>
+</head>
+
+<body>
+  <div class="container">
+    <!--                   HEADER             -->
+    <div class="header">
+      <div class="title">
+        <h1>To Do List</h1>
+      </div>
+    </div>
+
+    <div class="list">
+      <div class="panel active">
+        <form action="" id="form">
+          <input type="text" class="input" id="input" placeholder="Next Goal" autocomplete="off">
+          <button class="submit-button" type="submit">
+            <i class="fa fa-plus-square" aria-hidden="true"></i>
+          </button>
+
+        </form>
+        <div id="todo-list" class="todo-list">
+          <ul class="todos" id="todos">
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- <script src="db.json"></script> -->
+  <script src="script.js"></script>
+</body>
+
+</html>
