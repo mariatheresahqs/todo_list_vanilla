@@ -1,4 +1,4 @@
-function renderListTodo(todos) {
+function renderTodoList(todos) {
     document.getElementById("todos").innerHTML = ""
     todos.forEach(renderNewItem);
 }
@@ -11,8 +11,11 @@ function renderNewItem(todo) {
         <i class="fa fa-trash trashButton" id="${todo.id}"></i>
     </div >
     `
-    let newItem = createDiv(todoHTML);
+    let newItem = document.createElement('div');
+    newItem.innerHTML = todoHTML;
+
     document.getElementById("todos").appendChild(newItem);
+
     const trashButton = newItem.querySelector('.trashButton');
     trashButton.addEventListener('click', deleteItem);
     const completedButton = newItem.querySelector('.completedButton');
@@ -26,4 +29,8 @@ function renderDeleteEffect(item) {
         parentBtn.classList.add('fallAnimation');
         setTimeout(() => { parentBtn.remove() }, 300);
     }
+}
+
+function renderCheckedEffect(item) {
+    item.classList.toggle("completed");
 }

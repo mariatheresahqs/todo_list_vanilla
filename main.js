@@ -1,29 +1,22 @@
-// GLOBALS
 var nextId = 1;
+var input;
+var submitBtn;
 
-// SELECTORS
-const input = document.querySelector('.input');
-const submitBtn = document.querySelector('.submit-button');
+initApp();
 
-submitBtn.addEventListener('click', createTodoItem);
+function initApp() {
+    input = document.querySelector('.input');
+    submitBtn = document.querySelector('.submit-button');
 
-// -----------------------------------  INITIALIZE AND CREATE TODOS -----------------------------------------
-initTodoList();
+    submitBtn.addEventListener('click', createTodoItem);
 
-function initTodoList() {
-    getTodos().then(todos => {
-        const lastTodo = todos[todos.length - 1].id;
+    apiGetTodoList().then(todos => {
         if (todos.length) {
-            nextId = lastTodo + 1;
-            renderListTodo(todos);
+            const lastIDTodoItem = todos[todos.length - 1].id;
+            nextId = lastIDTodoItem + 1;
+            renderTodoList(todos);
         }
     })
-}
-
-function createDiv(newItemString) {
-    let div = document.createElement('div');
-    div.innerHTML = newItemString.trim();
-    return div.firstChild;
 }
 
 function createTodoItem(e) {
@@ -31,7 +24,7 @@ function createTodoItem(e) {
     let todoText = input.value;
     let isChecked = false;
     if (todoText) {
-        createTodo({ "msg": todoText, "id": nextId, "isChecked": isChecked }).then(resp => {
+        apiCreateTodoItem({ "msg": todoText, "id": nextId, "isChecked": isChecked }).then(resp => {
             return resp.json();
         }).then(todo => {
             renderNewItem(todo);
@@ -41,23 +34,18 @@ function createTodoItem(e) {
     }
 }
 
-// -----------------------------------  DELETE -----------------------------------------
-function deleteItem(e) {
-    const item = e.target;
-    deleteTodo(item.id).then(resp => {
-        renderDeleteEffect(item);
+function deleteItem({ target }) {
+    apiDeleteTodo(target.id).then(resp => {
+        renderDeleteEffect(target);
     });
 }
 
-// -----------------------------------  CHECK -----------------------------------------
-function checkedItem(e) {
-    const item = e.target;
-    const parentBtn = item.parentElement;
-
+function checkedItem({ target }) {
+    const parentBtn = target.parentElement;
     const completed = (!parentBtn.classList.contains("completed"));
 
-    editTodo(parentBtn.id, { "isChecked": completed }).then(resp => {
-        parentBtn.classList.toggle("completed");
+    apiEditTodo(parentBtn.id, { "isChecked": completed }).then(resp => {
+        renderCheckedEffect(parentBtn);
     });
 }
 
