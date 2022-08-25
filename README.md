@@ -15,3 +15,7 @@ npm install -g json-server
 ```sh
 json-server --watch db.json
 ```
+
+### Enjoy
+
+[The Vanilla Todo App](https://mariatheresahqs.github.io/todo_list_vanilla/)
