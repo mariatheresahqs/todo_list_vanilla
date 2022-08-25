@@ -11,8 +11,6 @@ body {
     background-image: radial-gradient(rgb(146, 185, 245), rgb(129, 231, 180));
 }
 
-
-
 /*   -----------------------   HEADER  -------------------------- */
 .header {
     margin-top: 30px;
@@ -23,64 +21,37 @@ h1 {
     font-size: 3rem;
 }
 
-/*   -----------------------   DAYS  -------------------------- */
+/*   -----------------------   CONTAINER -------------------------- */
 .container {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    /* overflow: hidden; */
 }
 
-.list {
+.containerList {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* flex-direction: column; */
-    width: 40vw;
-    /* border: solid 1px black; */
-}
-
-.panel {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    width: auto;
+    min-width: 40vw;
     border-radius: 50px;
     cursor: pointer;
-    flex: 0.5;
     padding: 1rem;
     margin: 10px;
-    position: relative;
-    transition: all 0.4s ease-in;
-    background-color: #e4a1c0
-}
-
-.panel h3 {
-    font-size: 24px;
-    text-align: center;
-    margin: 10px 0;
-    opacity: 0;
-    color: white;
-}
-
-.panel.active {
-    flex: 5;
-}
-
-.panel.active h3 {
-    opacity: 1;
-    transition: opacity 0.1s ease-out;
-}
-
-@media (max-width: 480px) {
-    .container {
-        width: 100vw;
-    }
+    background-color: #e4a1c0;
+    /* overflow: hidden; */
 }
 
 /*   -----------------------   FORMS  -------------------------- */
+form {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+}
+
 form input,
 form button {
     padding: 0.5rem;
@@ -88,85 +59,57 @@ form button {
     border: none;
     background-color: rgba(255, 255, 255, 0.486);
     border-radius: 50px;
-
 }
-
 
 input:focus {
     outline: none;
 }
 
-.todos li.completed {
-    color: #b6b6b6;
-    text-decoration: line-through;
+/*   -----------------------   TODO LIST  -------------------------- */
+.todoList {
+    padding: 0;
 }
 
-#form {
-    visibility: hidden;
-}
-
-.itemDiv {
-    margin: 20px;
+.todo-item-Div {
     background-color: rgba(255, 255, 255, 0.178);
     color: black;
     font-size: .8rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: all 0.5s ease;
+    margin: 20px;
+    transition: all 0.2s ease;
+    border-radius: 50px;
+    margin: 0.1rem;
 }
 
-.todo-item {
+.todo-item-li {
     padding: 1rem;
     list-style: none;
-
 }
 
-.todos {
-    padding: 0;
-}
-
-.todos li {
+li {
     flex: 1;
 }
 
 
-.panel.active #form {
-    visibility: visible;
+@media (max-width: 500px) {
+    .container {
+        width: 100vw;
+    }
+
+    li {
+        max-width: 60vw;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    input {
+        max-width: 45vw;
+    }
 }
 
-.itemDiv {
-    margin: 20px;
-    /* background-color: white; */
-    color: black;
-    font-size: .8rem;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    transition: all 0.2s ease;
-    visibility: hidden;
-    border-radius: 50px;
-    margin: 0.1rem;
-
-}
-
-.panel.active .itemDiv {
-    visibility: visible;
-
-}
-
-.completed {
-    text-decoration: line-through;
-    font-size: .7rem;
-    opacity: 0.5;
-}
-
-.fallAnimation {
-    transform: translateY(8rem) rotateZ(20deg);
-    opacity: 0;
-}
-
-
+/*   -----------------------  ANIMATIONS  -------------------------- */
 .trashButton,
 .completedButton {
     background: #ffffff00;
@@ -180,20 +123,27 @@ input:focus {
     font-size: 1rem;
     border-radius: 50px;
     align-items: flex-end;
+}
 
+.completed {
+    text-decoration: line-through;
+    font-size: .7rem;
+    opacity: 0.5;
+}
+
+.fallAnimation {
+    transform: translateY(8rem) rotateZ(20deg);
+    opacity: 0;
 }
 
 .trashButton:hover {
     color: #ea4c04;
-    /* background: white; */
 }
 
 .completedButton:hover {
     color: #1e861b;
-    /* background-color: white; */
 }
 
 form button:hover {
     color: white;
-    /* background: #7cda81; */
 }

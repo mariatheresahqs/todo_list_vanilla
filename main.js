@@ -1,51 +1,52 @@
-var nextId = 1;
-var input;
-var submitBtn;
+let nextTodoItemId = 1;
+let todoInput;
+let submitBtn;
 
 initApp();
 
 function initApp() {
-    input = document.querySelector('.input');
+    todoInput = document.querySelector('.input');
     submitBtn = document.querySelector('.submit-button');
 
-    submitBtn.addEventListener('click', createTodoItem);
+    submitBtn.addEventListener('click', createNewTodoItem);
 
-    apiGetTodoList().then(todos => {
-        if (todos.length) {
-            const lastIDTodoItem = todos[todos.length - 1].id;
-            nextId = lastIDTodoItem + 1;
-            renderTodoList(todos);
+    apiGetTodoList().then(todoItemsList => {
+        if (todoItemsList.length) {
+            const lastTodoItemId = todoItemsList[todoItemsList.length - 1].id;
+            nextTodoItemId = lastTodoItemId + 1;
+            renderTodoList(todoItemsList);
         }
     })
 }
 
-function createTodoItem(e) {
+function createNewTodoItem(e) {
     e.preventDefault();
-    let todoText = input.value;
-    let isChecked = false;
-    if (todoText) {
-        apiCreateTodoItem({ "msg": todoText, "id": nextId, "isChecked": isChecked }).then(resp => {
+    const todoItemText = todoInput.value;
+    const newTodoItem = { "text": todoItemText, "id": nextTodoItemId, "isTodoItemDone": false };
+
+    if (todoItemText) {
+        apiCreateNewTodoItem(newTodoItem).then(resp => {
             return resp.json();
-        }).then(todo => {
-            renderNewItem(todo);
-            nextId++;
-            input.value = '';
+        }).then(todoItem => {
+            renderNewItem(todoItem);
+            nextTodoItemId++;
+            todoInput.value = '';
         });
     }
 }
 
-function deleteItem({ target }) {
-    apiDeleteTodo(target.id).then(resp => {
-        renderDeleteEffect(target);
+function deleteTodoItem({ target }) {
+    apiDeleteTodoItem(target.id).then(() => {
+        renderDeleteAnimation(target);
     });
 }
 
-function checkedItem({ target }) {
-    const parentBtn = target.parentElement;
-    const completed = (!parentBtn.classList.contains("completed"));
+function checkTodoItem({ target }) {
+    const todoItemButtonParent = target.parentElement;
+    const toggledTodoItemDone = (!todoItemButtonParent.classList.contains("completed"));
 
-    apiEditTodo(parentBtn.id, { "isChecked": completed }).then(resp => {
-        renderCheckedEffect(parentBtn);
+    apiEditTodoItem(todoItemButtonParent.id, { "isTodoItemDone": toggledTodoItemDone }).then(() => {
+        renderCheckedAnimation(todoItemButtonParent);
     });
 }
 

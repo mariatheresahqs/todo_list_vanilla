@@ -15,29 +15,28 @@
 
 <body>
   <div class="container">
-    <!--                   HEADER             -->
+
     <div class="header">
       <div class="title">
         <h1>To Do List</h1>
       </div>
     </div>
 
-    <div class="list">
-      <div class="panel active">
-        <form action="" id="form">
+    <div class="containerList">
+      <form action="" id="form">
+        <div class="input-Div">
           <input type="text" class="input" id="input" placeholder="Next Goal" autocomplete="off">
           <button class="submit-button" type="submit">
             <i class="fa fa-plus-square" aria-hidden="true"></i>
           </button>
-          <div id="todo-list" class="todo-list">
-            <ul class="todos" id="todos">
-            </ul>
-          </div>
-        </form>
-      </div>
-
+        </div>
+        <ul class="todoList" id="todoList">
+        </ul>
+      </form>
     </div>
   </div>
+
+
   <script src="api.js"></script>
   <script src="render.js"></script>
   <script src="main.js"></script>
