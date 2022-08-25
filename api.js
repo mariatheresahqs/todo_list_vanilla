@@ -2,35 +2,36 @@ class Api {
 
     constructor() {
         this.url = "http://localhost:3000/todos/";
+        this.headers = { "Content-type": "application/json; charset=UTF-8" };
     }
 
-    createNewTodoItem(data) {
+    createTodoItem(data) {
         return fetch(this.url, {
             method: "POST",
             body: JSON.stringify(data),
-            headers: { "Content-type": "application/json; charset=UTF-8" }
-        });
+            headers: this.headers
+        })
     }
 
     getTodoList() {
         return fetch(this.url, {
             method: "GET",
-            headers: { "Content-type": "application/json; charset=UTF-8" }
-        }).then(resp => resp.json())
+            headers: this.headers
+        })
     }
 
     editTodoItem(id, data) {
         return fetch(`${this.url}${id}`, {
             method: "PATCH",
             body: JSON.stringify(data),
-            headers: { "Content-type": "application/json; charset=UTF-8" }
-        }).then(resp => resp.json())
+            headers: this.headers
+        })
     }
 
     deleteTodoItem(id) {
         return fetch(`${this.url}${id}`, {
             method: "DELETE",
-            headers: { "Content-type": "application/json; charset=UTF-8" }
+            headers: this.headers
         });
     }
 
