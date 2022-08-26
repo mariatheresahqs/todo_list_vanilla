@@ -25,7 +25,7 @@ function initApp() {
     });
 }
 
-function createNewTodoItem(e) {
+function createTodoItem(e) {
     e.preventDefault();
     const todoItemText = todoInput.value;
     const newTodoItem = { "text": todoItemText, "id": nextTodoItemId, "isTodoItemDone": false };
