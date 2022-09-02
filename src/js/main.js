@@ -12,7 +12,7 @@ function initApp() {
     todoInput = document.querySelector('.input');
     submitBtn = document.querySelector('.submit-button');
 
-    submitBtn.addEventListener('click', createNewTodoItem);
+    submitBtn.addEventListener('click', createTodoItem);
 
     api.getTodoList().then(resp => {
         return resp.json();
